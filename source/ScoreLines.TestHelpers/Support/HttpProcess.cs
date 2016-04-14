@@ -1,0 +1,122 @@
+using System;
+using System.Diagnostics;
+using System.Threading;
+using System.Threading.Tasks;
+using Scorelines.TestHelpers.Extensions;
+
+namespace Scorelines.TestHelpers.Support
+{
+    internal abstract class HttpProcess : IDisposable
+    {
+        private readonly Uri _endpoint;
+        private readonly ProcessStartInfo _startInfo;
+        private readonly TimeSpan _maximumWaitTimeForProcessToRespond;
+
+        private Process _process;
+        private bool _isDisposed;
+
+        protected HttpProcess(Uri endpoint, ProcessStartInfo startInfo)
+            : this(endpoint, startInfo, TimeSpan.FromSeconds(5))
+        {
+        }
+
+        protected HttpProcess(Uri endpoint, ProcessStartInfo startInfo, TimeSpan maximumWaitTimeForProcessToRespond)
+        {
+            _endpoint = endpoint;
+            _startInfo = startInfo;
+            _maximumWaitTimeForProcessToRespond = maximumWaitTimeForProcessToRespond;
+        }
+
+        internal bool IsRunning()
+        {
+            return _endpoint.IsResponding();
+        }
+
+        internal void Start()
+        {
+            _process = StartProcess();
+            WaitForProcessToRespond();
+        }
+
+        internal HttpProcess StartIfNotRunning()
+        {
+            if (IsRunning())
+            {
+                return this;
+            }
+
+            Start();
+
+            return this;
+        }
+
+        private Process StartProcess()
+        {
+            try
+            {
+                var process = new Process { StartInfo = _startInfo };
+                process.Start();
+
+                Task.Factory.StartNew(process.WaitForExit);
+
+                return process;
+            }
+            catch (Exception)
+            {
+                throw new Exception($"Cannot start '{GetType().Name}' at '{_endpoint}'.");
+            }
+        }
+
+        private void WaitForProcessToRespond()
+        {
+            var stopwatch = Stopwatch.StartNew();
+
+            while (!_endpoint.IsResponding())
+            {
+                if (stopwatch.Elapsed > _maximumWaitTimeForProcessToRespond)
+                {
+                    throw new TimeoutException($"'{GetType().Name}' at '{_endpoint}' did not respond with '{_maximumWaitTimeForProcessToRespond}'.");
+                }
+                Thread.Sleep(0);
+            }
+        }
+
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in Dispose(bool disposing).
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Releases unmanaged and optionally managed resources.
+        /// </summary>
+        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_isDisposed)
+            {
+                if (_process != null)
+                {
+                    _process.Kill();
+                    _process = null;
+                }
+            }
+
+            _isDisposed = true;
+        }
+
+        /// <summary>
+        /// Finalizes an instance of the <see cref="HttpProcess"/> class.
+        /// </summary>
+        ~HttpProcess()
+        {
+            // Do not change this code.
+            // Put cleanup code in Dispose(bool disposing).
+            Dispose(false);
+        }
+    }
+}
