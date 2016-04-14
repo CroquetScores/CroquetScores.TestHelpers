@@ -1,0 +1,17 @@
+{
+  "name": "scorelines-app-test-helpers",
+  "version": "1.0.0",
+  "description": "Collection of projects containing test helpers for the scorelines-app-* collection of repositories.",
+  "main": "scorelines-app-test-helpers.sln",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://bitbucket.org/scorelines/scorelines-app-test-helpers.git"
+  },
+  "author": "Tim Murphy <tim@26tp.com> (https://timmurphy.it)",
+  "license": "SEE LICENSE IN LICENSE",
+  "private": true,
+  "homepage": "https://bitbucket.org/scorelines/scorelines-app-test-helpers#readme"
+}
