@@ -17,7 +17,7 @@
   "license": "SEE LICENSE IN LICENSE",
   "private": true,
   "homepage": "https://bitbucket.org/scorelines/scorelines-app-test-helpers#readme",
-  "devDependencies": {
-    "scorelines-build-helpers": "git+https://bitbucket.org/scorelines/scorelines-build-helpers.git#master"
+  "dependencies": {
+    "scorelines-build-helpers": "git+https://bitbucket.org/scorelines/scorelines-build-helpers.git"
   }
 }
