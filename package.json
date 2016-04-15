@@ -4,10 +4,8 @@
   "description": "Collection of projects containing test helpers for the scorelines-app-* collection of repositories.",
   "main": "scorelines-app-test-helpers.sln",
   "scripts": {
-    "compile": "node %cd%\\node_modules\\scorelines-build-helpers\\scripts\\compile-solution.js",
-    "package": "node %cd%\\node_modules\\scorelines-build-helpers\\scripts\\create-nuget-package.js %cd%\\source\\Scorelines.TestHelpers\\Scorelines.TestHelpers.csproj %cd%\\package.json",
-    "postinstall": "node %cd%\\node_modules\\scorelines-build-helpers\\scripts\\restore-nuget-packages.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "package": "mkdirp -p ./artifacts & npm-nuget pack ./source/Scorelines.TestHelpers/Scorelines.TestHelpers.csproj -Version %npm_package_version% -OutputDirectory ./artifacts",
+    "postinstall": "npm run package"
   },
   "repository": {
     "type": "git",
@@ -18,6 +16,7 @@
   "private": true,
   "homepage": "https://bitbucket.org/scorelines/scorelines-app-test-helpers#readme",
   "dependencies": {
-    "scorelines-build-helpers": "git+https://bitbucket.org/scorelines/scorelines-build-helpers.git"
+    "mkdirp": "^0.5.1",
+    "npm-nuget": "git+https://github.com/TimMurphy/npm-nuget.git#v1.0.1"
   }
 }
