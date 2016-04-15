@@ -10,6 +10,12 @@ After cloning this repository:
 
 - Install local npm packages.
 
-  ``` 
+  ```
   npm install --no-optional
   ```
+
+## run command
+
+Use `run [task]` command to compile, test, publish, etc the `scorelines-app-test-helpers` solution.
+
+- `run compile` - Compiles a release version of the solution.

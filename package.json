@@ -4,7 +4,8 @@
   "description": "Collection of projects containing test helpers for the scorelines-app-* collection of repositories.",
   "main": "scorelines-app-test-helpers.sln",
   "scripts": {
-    "postinstall": "node ./node_modules/scorelines-build-helpers/scripts/nuget/restore-nuget-packages.js",
+    "compile": "node ./node_modules/scorelines-build-helpers/scripts/compile-solution.js", 
+    "postinstall": "node ./node_modules/scorelines-build-helpers/scripts/restore-nuget-packages.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
