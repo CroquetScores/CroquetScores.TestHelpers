@@ -18,6 +18,5 @@ After cloning this repository:
 
 Use `run [task]` command to compile, test, publish, etc the `scorelines-app-test-helpers` solution.
 
-- `run compile` - Compiles a release version of the solution.
 - `run package` - Create NuGet package.
 - `run version [<newversion> | major | minor | patch | premajor | preminor | prepatch | prerelease]` - See [npm version](https://docs.npmjs.com/cli/version) for details.
