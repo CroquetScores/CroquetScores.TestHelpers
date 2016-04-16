@@ -4,7 +4,8 @@
   "description": "Collection of projects containing test helpers for the scorelines-app-* collection of repositories.",
   "main": "scorelines-app-test-helpers.sln",
   "scripts": {
-    "package": "mkdirp -p ./artifacts & npm-nuget pack ./source/Scorelines.TestHelpers/Scorelines.TestHelpers.csproj -Build -Properties Configuration=Release -Exclude FodyWeavers.xml -Version %npm_package_version% -OutputDirectory ./artifacts -MSBuildVersion 14",
+    "build": "npm-msbuild /Target:Clean;ReBuild /Property:Configuration=Release /Verbosity:Minimal",
+    "package": "run build & mkdirp ./artifacts & npm-nuget pack ./source/Scorelines.TestHelpers/Scorelines.TestHelpers.csproj -Properties Configuration=Release -Exclude FodyWeavers.xml -Version %npm_package_version% -OutputDirectory .\\artifacts",
     "postinstall": "npm-nuget restore & npm run package"
   },
   "repository": {
@@ -17,6 +18,7 @@
   "homepage": "https://bitbucket.org/scorelines/scorelines-app-test-helpers#readme",
   "dependencies": {
     "mkdirp": "^0.5.1",
+    "npm-msbuild": "git+https://github.com/TimMurphy/npm-msbuild.git#v1.0.0",
     "npm-nuget": "git+https://github.com/TimMurphy/npm-nuget.git#v1.0.2"
   }
 }
