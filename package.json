@@ -5,7 +5,9 @@
   "main": "scorelines-app-test-helpers.sln",
   "scripts": {
     "build": "npm-msbuild /Target:Clean;ReBuild /Property:Configuration=Release /Verbosity:Minimal",
-    "package": "run build & mkdirp ./artifacts & npm-nuget pack ./source/Scorelines.TestHelpers/Scorelines.TestHelpers.csproj -Properties Configuration=Release -Exclude FodyWeavers.xml -Version %npm_package_version% -OutputDirectory .\\artifacts",
+    "pack-scorelines-test-helpers": "npm-nuget pack ./source/Scorelines.TestHelpers/Scorelines.TestHelpers.csproj -Properties Configuration=Release -Exclude FodyWeavers.xml -Version %npm_package_version% -OutputDirectory .\\artifacts",
+    "pack-scorelines-test-helpers-selenium": "npm-nuget pack ./source/Scorelines.TestHelpers.Selenium/Scorelines.TestHelpers.Selenium.csproj -Properties Configuration=Release -Exclude FodyWeavers.xml -Version %npm_package_version% -OutputDirectory .\\artifacts",
+    "package": "run build & mkdirp ./artifacts & npm run pack-scorelines-test-helpers & npm run pack-scorelines-test-helpers-selenium",
     "postinstall": "npm-nuget restore & npm run package"
   },
   "repository": {

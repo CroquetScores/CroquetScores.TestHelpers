@@ -2,7 +2,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 
-namespace Scorelines.TestHelpers.Support
+namespace Scorelines.TestHelpers.Selenium.Support
 {
     internal class WebDriverManager : IDisposable
     {
