@@ -14,9 +14,9 @@ After cloning this repository:
   npm install --no-optional
   ```
 
-## run command
+## Tasks
 
-Use `run [task]` command to compile, test, publish, etc the `scorelines-app-test-helpers` solution.
+Use Gulp to run any of the following tasks:
 
-- `run package` - Create NuGet package.
-- `run version [<newversion> | major | minor | patch | premajor | preminor | prepatch | prerelease]` - See [npm version](https://docs.npmjs.com/cli/version) for details.
+- `gulp build` - Compile, test & create NuGet package.
+- `gulp publish --bump [<newversion> | major | minor | patch | premajor | preminor | prepatch | prerelease]` - bump the version number, run the build task and publish the NuGet package. See [npm version](https://docs.npmjs.com/cli/version) for details on <newversion> argument.

@@ -4,11 +4,7 @@
   "description": "Collection of projects containing test helpers for the scorelines-app-* collection of repositories.",
   "main": "scorelines-app-test-helpers.sln",
   "scripts": {
-    "build": "npm-msbuild /Target:Clean;ReBuild /Property:Configuration=Release /Verbosity:Minimal",
-    "pack-scorelines-test-helpers": "npm-nuget pack ./source/Scorelines.TestHelpers/Scorelines.TestHelpers.csproj -Properties Configuration=Release -Exclude FodyWeavers.xml -Version %npm_package_version% -OutputDirectory .\\artifacts",
-    "pack-scorelines-test-helpers-selenium": "npm-nuget pack ./source/Scorelines.TestHelpers.Selenium/Scorelines.TestHelpers.Selenium.csproj -Properties Configuration=Release -Exclude FodyWeavers.xml -Version %npm_package_version% -OutputDirectory .\\artifacts",
-    "package": "run build & mkdirp ./artifacts & npm run pack-scorelines-test-helpers & npm run pack-scorelines-test-helpers-selenium",
-    "postinstall": "npm-nuget restore & npm run package"
+    "postinstall": "npm remove --global gulp && npm install --global --no-optional gulp-cli && npm-nuget restore"
   },
   "repository": {
     "type": "git",
@@ -18,9 +14,15 @@
   "license": "SEE LICENSE IN LICENSE",
   "private": true,
   "homepage": "https://bitbucket.org/scorelines/scorelines-app-test-helpers#readme",
-  "dependencies": {
+  "devDependencies": {
+    "babel-preset-es2015": "^6.6.0",
+    "babel-register": "^6.7.2",
+    "del": "^2.2.0",
+    "gulp": "git+https://github.com/gulpjs/gulp.git#4.0",
+    "gulplog": "^1.0.0",
     "mkdirp": "^0.5.1",
-    "npm-msbuild": "git+https://github.com/TimMurphy/npm-msbuild.git#v1.0.0",
-    "npm-nuget": "git+https://github.com/TimMurphy/npm-nuget.git#v1.0.2"
+    "npm-msbuild": "git+https://github.com/TimMurphy/npm-msbuild.git#v3.0.0",
+    "npm-nuget": "git+https://github.com/TimMurphy/npm-nuget.git#v3.0.0",
+    "shelljs": "^0.6.0"
   }
 }
