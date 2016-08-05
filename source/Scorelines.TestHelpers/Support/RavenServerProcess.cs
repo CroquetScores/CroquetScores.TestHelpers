@@ -7,13 +7,13 @@ namespace Scorelines.TestHelpers.Support
 {
     internal class RavenServerProcess : LocalHttpProcess
     {
-        internal RavenServerProcess(int port)
-            : this(GetExecutable(), Projects.CroquetScoresWeb.Directory, port)
+        internal RavenServerProcess(int port, TimeSpan maximumWaitTimeForProcessToRespond = default(TimeSpan))
+            : this(GetExecutable(), Projects.CroquetScoresWeb.Directory, port, maximumWaitTimeForProcessToRespond)
         {
         }
 
-        internal RavenServerProcess(FileInfo executable, DirectoryInfo projectDirectory, int port)
-            : base(port, GetProcessStartInfo(executable, projectDirectory, port))
+        internal RavenServerProcess(FileInfo executable, DirectoryInfo projectDirectory, int port, TimeSpan maximumWaitTimeForProcessToRespond = default(TimeSpan))
+            : base(port, GetProcessStartInfo(executable, projectDirectory, port), maximumWaitTimeForProcessToRespond)
         {
         }
 

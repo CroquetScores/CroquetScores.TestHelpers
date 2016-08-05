@@ -6,13 +6,13 @@ namespace Scorelines.TestHelpers.Support
 {
     internal class WebServerProcess : LocalHttpProcess
     {
-        internal WebServerProcess(string scheme, int port)
-            : this(GetExecutable(), Solution.IISExpressConfigFile, scheme, port)
+        internal WebServerProcess(string scheme, int port, TimeSpan maximumWaitTimeForProcessToRespond = default(TimeSpan))
+            : this(GetExecutable(), Solution.IISExpressConfigFile, scheme, port, maximumWaitTimeForProcessToRespond)
         {
         }
 
-        internal WebServerProcess(FileInfo executable, FileInfo iisExpressConfigFile, string scheme, int port)
-            : base(scheme, port, GetProcessStartInfo(executable, iisExpressConfigFile))
+        internal WebServerProcess(FileInfo executable, FileInfo iisExpressConfigFile, string scheme, int port, TimeSpan maximumWaitTimeForProcessToRespond = default(TimeSpan))
+            : base(scheme, port, GetProcessStartInfo(executable, iisExpressConfigFile), maximumWaitTimeForProcessToRespond)
         {
         }
 

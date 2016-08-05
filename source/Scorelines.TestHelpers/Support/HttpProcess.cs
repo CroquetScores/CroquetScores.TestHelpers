@@ -15,16 +15,11 @@ namespace Scorelines.TestHelpers.Support
         private Process _process;
         private bool _isDisposed;
 
-        protected HttpProcess(Uri endpoint, ProcessStartInfo startInfo)
-            : this(endpoint, startInfo, TimeSpan.FromSeconds(5))
-        {
-        }
-
-        protected HttpProcess(Uri endpoint, ProcessStartInfo startInfo, TimeSpan maximumWaitTimeForProcessToRespond)
+        protected HttpProcess(Uri endpoint, ProcessStartInfo startInfo, TimeSpan maximumWaitTimeForProcessToRespond = default(TimeSpan))
         {
             _endpoint = endpoint;
             _startInfo = startInfo;
-            _maximumWaitTimeForProcessToRespond = maximumWaitTimeForProcessToRespond;
+            _maximumWaitTimeForProcessToRespond = maximumWaitTimeForProcessToRespond == default(TimeSpan) ? TimeSpan.FromSeconds(5) : maximumWaitTimeForProcessToRespond;
         }
 
         internal bool IsRunning()
