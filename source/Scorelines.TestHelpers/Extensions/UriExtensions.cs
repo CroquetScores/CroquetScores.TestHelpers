@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net.Http;
 using Anotar.NLog;
 
@@ -25,19 +26,40 @@ namespace Scorelines.TestHelpers.Extensions
             }
             catch (HttpRequestException exception)
             {
-                LogTo.InfoException($"{uri} is not responding. {exception.Message}", exception);
-                return false;
+                return HandleHttpRequestException(uri, exception);
             }
             catch (AggregateException aggregateException)
             {
-                if (aggregateException.InnerExceptions.Count != 1 || aggregateException.InnerException.GetType() != typeof(HttpRequestException))
+                HttpRequestException exception = null;
+
+                if (aggregateException.InnerExceptions.Any())
+                {
+                    exception = aggregateException.InnerException as HttpRequestException;
+                }
+
+                if (exception == null)
                 {
                     throw;
                 }
-
-                LogTo.InfoException($"{uri} is not responding. {aggregateException.InnerException.Message}", aggregateException.InnerException);
-                return false;
+                return HandleHttpRequestException(uri, exception);
             }
+        }
+
+        private static bool HandleHttpRequestException(Uri uri, HttpRequestException exception)
+        {
+            if (IsCertificateException(exception))
+            {
+                return true;
+            }
+
+            LogTo.InfoException($"{uri} is not responding. {exception.Message}", exception);
+            return false;
+        }
+
+        private static bool IsCertificateException(HttpRequestException exception)
+        {
+            LogTo.Debug($"{nameof(IsCertificateException)}(HttpRequestException.InnerException: '{exception.InnerException.Message}'");
+            return exception.InnerException.Message == "The underlying connection was closed: Could not establish trust relationship for the SSL/TLS secure channel.";
         }
     }
 }
