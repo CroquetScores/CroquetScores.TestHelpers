@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using Anotar.NLog;
 
 namespace Scorelines.TestHelpers.Extensions
 {
@@ -22,17 +23,20 @@ namespace Scorelines.TestHelpers.Extensions
                     return true;
                 }
             }
-            catch (HttpRequestException)
+            catch (HttpRequestException exception)
             {
+                LogTo.InfoException($"{uri} is not responding. {exception.Message}", exception);
                 return false;
             }
             catch (AggregateException aggregateException)
             {
-                if (aggregateException.InnerExceptions.Count == 1 && aggregateException.InnerException.GetType() == typeof(HttpRequestException))
+                if (aggregateException.InnerExceptions.Count != 1 || aggregateException.InnerException.GetType() != typeof(HttpRequestException))
                 {
-                    return false;
+                    throw;
                 }
-                throw;
+
+                LogTo.InfoException($"{uri} is not responding. {aggregateException.InnerException.Message}", aggregateException.InnerException);
+                return false;
             }
         }
     }
