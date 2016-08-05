@@ -44,7 +44,7 @@ namespace Scorelines.TestHelpers.Support
             }
 
             throw new FileNotFoundException(string.Format(
-                "Cannot find RavenDB Server executable.{0}Looked for:{0}{1}.", 
+                "Cannot find RavenDB Server executable.{0}Looked for:{0}{1}.",
                 Environment.NewLine,
                 string.Join(Environment.NewLine, possibleExecutables.Select(f => string.Format("- {0}", f.FullName)))));
         }

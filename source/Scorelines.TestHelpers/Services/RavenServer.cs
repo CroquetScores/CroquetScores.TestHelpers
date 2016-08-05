@@ -24,7 +24,7 @@ namespace Scorelines.TestHelpers.Services
 
         private static RavenServerProcess GetOrAddServer(int port)
         {
-            return (RavenServerProcess) Servers.GetOrAdd(port, p => new RavenServerProcess(port));
+            return (RavenServerProcess)Servers.GetOrAdd(port, p => new RavenServerProcess(port));
         }
     }
 }

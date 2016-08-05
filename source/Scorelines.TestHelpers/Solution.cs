@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 
 namespace Scorelines.TestHelpers
@@ -29,10 +28,10 @@ namespace Scorelines.TestHelpers
 
         private static bool FindSolutionDirectoryByAssembly(out DirectoryInfo solutionDirectory)
         {
-            var type = typeof (Projects);
+            var type = typeof(Projects);
             var assembly = type.Assembly;
             var location = assembly.Location;
-            var configDirectory = (new FileInfo(location)).Directory; // e.g. Debug or Release
+            var configDirectory = new FileInfo(location).Directory; // e.g. Debug or Release
             var binDirectory = configDirectory.Parent;
             var projectDirectory = binDirectory.Parent;
             var projectsDirectory = projectDirectory.Parent;

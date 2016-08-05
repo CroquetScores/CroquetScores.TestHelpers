@@ -6,8 +6,8 @@ namespace Scorelines.TestHelpers.Selenium.Support
 {
     internal class WebDriverManager : IDisposable
     {
-        private bool _isDisposed;
         internal readonly IWebDriver WebDriver;
+        private bool _isDisposed;
 
         internal WebDriverManager(TimeSpan implicitlyWait)
         {

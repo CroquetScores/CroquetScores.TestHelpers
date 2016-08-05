@@ -9,17 +9,27 @@ namespace Scorelines.TestHelpers.Support
     internal abstract class HttpProcess : IDisposable
     {
         private readonly Uri _endpoint;
-        private readonly ProcessStartInfo _startInfo;
         private readonly TimeSpan _maximumWaitTimeForProcessToRespond;
+        private readonly ProcessStartInfo _startInfo;
+        private bool _isDisposed;
 
         private Process _process;
-        private bool _isDisposed;
 
         protected HttpProcess(Uri endpoint, ProcessStartInfo startInfo, TimeSpan maximumWaitTimeForProcessToRespond = default(TimeSpan))
         {
             _endpoint = endpoint;
             _startInfo = startInfo;
             _maximumWaitTimeForProcessToRespond = maximumWaitTimeForProcessToRespond == default(TimeSpan) ? TimeSpan.FromSeconds(5) : maximumWaitTimeForProcessToRespond;
+        }
+
+        /// <summary>
+        ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in Dispose(bool disposing).
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         internal bool IsRunning()
@@ -49,7 +59,7 @@ namespace Scorelines.TestHelpers.Support
         {
             try
             {
-                var process = new Process { StartInfo = _startInfo };
+                var process = new Process {StartInfo = _startInfo};
                 process.Start();
 
                 Task.Factory.StartNew(process.WaitForExit);
@@ -77,17 +87,7 @@ namespace Scorelines.TestHelpers.Support
         }
 
         /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-        /// </summary>
-        public void Dispose()
-        {
-            // Do not change this code. Put cleanup code in Dispose(bool disposing).
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        /// <summary>
-        /// Releases unmanaged and optionally managed resources.
+        ///     Releases unmanaged and optionally managed resources.
         /// </summary>
         /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
         protected virtual void Dispose(bool disposing)
@@ -105,7 +105,7 @@ namespace Scorelines.TestHelpers.Support
         }
 
         /// <summary>
-        /// Finalizes an instance of the <see cref="HttpProcess"/> class.
+        ///     Finalizes an instance of the <see cref="HttpProcess" /> class.
         /// </summary>
         ~HttpProcess()
         {
