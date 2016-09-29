@@ -27,9 +27,7 @@ const config = {
         configuration: 'Release'
     },
     nuget: {
-        apiKey: process.env.APPSETTING_nuget_timmurphy_it_api_key,
-        credentials: process.env.APPSETTING_NuGetPackageSourceCredentials_nuget_timmurphy_it,
-        source: 'nuget_timmurphy_it_publish'
+        source: 'timmurphy.it'
     }
 };
 
@@ -103,17 +101,8 @@ export function pushNuGetPackages(cb) {
 
 function pushNuGetPackage(packagePathTemplate) {
     const packagePath = packagePathTemplate.replace('{version}', getPackageVersion());
-    const setCredentials = !(process.env.NuGetPackageSourceCredentials_nuget_timmurphy_it);
 
-    if (setCredentials) {
-        process.env.NuGetPackageSourceCredentials_nuget_timmurphy_it_publish = config.nuget.credentials;
-    }
-
-    nuget.exec(`push ${packagePath} ${config.nuget.apiKey} -Source ${config.nuget.source}`);
-
-    if (setCredentials) {
-        process.env.NuGetPackageSourceCredentials_nuget_timmurphy_it_publish = null;
-    }
+    nuget.exec(`push ${packagePath} -Source ${config.nuget.source}`);
 }
 
 function runShellCommand(cmd) {
