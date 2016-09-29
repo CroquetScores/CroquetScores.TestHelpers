@@ -1,18 +1,18 @@
-﻿using System;
+using System;
+using Anotar.NLog;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
 
-namespace Scorelines.TestHelpers.Selenium.Support
+namespace Scorelines.TestHelpers.Selenium.Services
 {
-    internal class WebDriverManager : IDisposable
+    public class WebDriverManager : IDisposable
     {
         internal readonly IWebDriver WebDriver;
         private bool _isDisposed;
 
-        internal WebDriverManager(TimeSpan implicitlyWait)
+        public WebDriverManager(IWebDriver webDriver, TimeSpan? implicitlyWait)
         {
-            WebDriver = new FirefoxDriver();
-            WebDriver.Manage().Timeouts().ImplicitlyWait(implicitlyWait);
+            WebDriver = webDriver;
+            WebDriver.Manage().Timeouts().ImplicitlyWait(implicitlyWait ?? TimeSpan.FromSeconds(5));
         }
 
         /// <summary>
@@ -36,10 +36,14 @@ namespace Scorelines.TestHelpers.Selenium.Support
         // ReSharper disable once UnusedParameter.Local
         private void Dispose(bool disposing)
         {
+            LogTo.Trace($"Dispose({nameof(disposing)}: {disposing})");
+
             if (!_isDisposed)
             {
                 // Dispose unmanaged objects and override Finalize() below.
-                WebDriver?.Close();
+                LogTo.Debug("Quiting WebDriver");
+                WebDriver.Quit();
+                LogTo.Debug("Quited WebDriver");
             }
 
             _isDisposed = true;

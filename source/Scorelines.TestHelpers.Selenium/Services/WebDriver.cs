@@ -1,22 +1,28 @@
 ﻿using System;
 using OpenQA.Selenium;
-using Scorelines.TestHelpers.Selenium.Support;
+using OpenQA.Selenium.Firefox;
 
 namespace Scorelines.TestHelpers.Selenium.Services
 {
     public static class WebDriver
     {
-        // ReSharper disable once PrivateFieldCanBeConvertedToLocalVariable
-        private static readonly WebDriverManager Manager;
+        private static WebDriverManager _manager;
 
-        public static readonly IWebDriver Instance;
-
-        static WebDriver()
+        // A copy of WebDriverManager must be held by this class so its finalizer is called 
+        // after all tests are run, not just the current test.
+        public static WebDriverManager Manager
         {
-            // A copy of WebDriverManager must be held by this class so its finalizer is called 
-            // after all tests are run, not just the current test.
-            Manager = new WebDriverManager(TimeSpan.FromSeconds(1));
-            Instance = Manager.WebDriver;
+            get { return _manager ?? (_manager = new WebDriverManager(new FirefoxDriver(), null)); }
+            set
+            {
+                if (_manager != null)
+                {
+                    throw new InvalidOperationException("Manager may not be changed.");
+                }
+                _manager = value;
+            }
         }
+
+        public static IWebDriver Instance => Manager.WebDriver;
     }
 }

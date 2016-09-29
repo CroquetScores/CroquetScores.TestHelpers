@@ -7,5 +7,6 @@ packages/
 
 *.csproj.user
 *.feature.cs
+*.user
 
 npm-debug.log
