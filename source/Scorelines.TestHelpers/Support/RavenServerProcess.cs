@@ -33,7 +33,7 @@ namespace Scorelines.TestHelpers.Support
             var possibleExecutables = new[]
             {
                 new FileInfo(@"C:\Program Files (No Install)\RavenDB 2.5\Server\Raven.Server.exe"),
-                new FileInfo(@"C:\RaveDB\Raven.Server.exe")
+                new FileInfo(@"C:\RavenDB\Raven.Server.exe")
             };
 
             var executable = possibleExecutables.SingleOrDefault(f => f.Exists);
