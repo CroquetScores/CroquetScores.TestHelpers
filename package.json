@@ -21,7 +21,7 @@
     "gulp": "git+https://github.com/gulpjs/gulp.git",
     "gulplog": "^1.0.0",
     "mkdirp": "^0.5.1",
-    "npm-msbuild": "git+https://github.com/TimMurphy/npm-msbuild.git#v3.0.0",
+    "npm-msbuild": "git+https://github.com/TimMurphy/npm-msbuild.git#v3.2.2",
     "npm-nuget": "git+https://github.com/TimMurphy/npm-nuget.git#v3.0.0",
     "shelljs": "^0.6.0"
   }
