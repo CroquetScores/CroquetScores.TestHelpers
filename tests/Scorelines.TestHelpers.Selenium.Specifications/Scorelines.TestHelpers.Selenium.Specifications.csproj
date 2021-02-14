@@ -159,15 +159,15 @@
     <Error Condition="!Exists('..\..\packages\Selenium.WebDriver.ChromeDriver.88.0.4324.9600\build\Selenium.WebDriver.ChromeDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Selenium.WebDriver.ChromeDriver.88.0.4324.9600\build\Selenium.WebDriver.ChromeDriver.targets'))" />
     <Error Condition="!Exists('..\..\packages\xunit.core.2.4.1\build\xunit.core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\xunit.core.2.4.1\build\xunit.core.props'))" />
     <Error Condition="!Exists('..\..\packages\xunit.core.2.4.1\build\xunit.core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\xunit.core.2.4.1\build\xunit.core.targets'))" />
-    <Error Condition="!Exists('..\..\packages\Fody.4.1.0\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Fody.4.1.0\build\Fody.targets'))" />
     <Error Condition="!Exists('..\..\packages\Anotar.NLog.Fody.4.8.1\build\Anotar.NLog.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Anotar.NLog.Fody.4.8.1\build\Anotar.NLog.Fody.props'))" />
+    <Error Condition="!Exists('..\..\packages\Fody.4.2.1\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Fody.4.2.1\build\Fody.targets'))" />
   </Target>
   <Import Project="..\..\packages\SpecFlow.3.6.23\build\SpecFlow.targets" Condition="Exists('..\..\packages\SpecFlow.3.6.23\build\SpecFlow.targets')" />
   <Import Project="..\..\packages\SpecFlow.Tools.MsBuild.Generation.3.6.23\build\SpecFlow.Tools.MsBuild.Generation.targets" Condition="Exists('..\..\packages\SpecFlow.Tools.MsBuild.Generation.3.6.23\build\SpecFlow.Tools.MsBuild.Generation.targets')" />
   <Import Project="..\..\packages\SpecFlow.xUnit.3.6.23\build\SpecFlow.xUnit.targets" Condition="Exists('..\..\packages\SpecFlow.xUnit.3.6.23\build\SpecFlow.xUnit.targets')" />
   <Import Project="..\..\packages\Selenium.WebDriver.ChromeDriver.88.0.4324.9600\build\Selenium.WebDriver.ChromeDriver.targets" Condition="Exists('..\..\packages\Selenium.WebDriver.ChromeDriver.88.0.4324.9600\build\Selenium.WebDriver.ChromeDriver.targets')" />
   <Import Project="..\..\packages\xunit.core.2.4.1\build\xunit.core.targets" Condition="Exists('..\..\packages\xunit.core.2.4.1\build\xunit.core.targets')" />
-  <Import Project="..\..\packages\Fody.4.1.0\build\Fody.targets" Condition="Exists('..\..\packages\Fody.4.1.0\build\Fody.targets')" />
+  <Import Project="..\..\packages\Fody.4.2.1\build\Fody.targets" Condition="Exists('..\..\packages\Fody.4.2.1\build\Fody.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
