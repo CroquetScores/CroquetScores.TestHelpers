@@ -40,8 +40,8 @@
     <Reference Include="Anotar.NLog, Version=4.8.1.0, Culture=neutral, PublicKeyToken=9d5b24f0733c26f7, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Anotar.NLog.Fody.4.8.1\lib\net452\Anotar.NLog.dll</HintPath>
     </Reference>
-    <Reference Include="BoDi, Version=1.5.0.0, Culture=neutral, PublicKeyToken=ff7cd5ea2744b496, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\BoDi.1.5.0\lib\net45\BoDi.dll</HintPath>
+    <Reference Include="BoDi, Version=1.4.1.0, Culture=neutral, PublicKeyToken=ff7cd5ea2744b496, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\BoDi.1.4.1\lib\net45\BoDi.dll</HintPath>
     </Reference>
     <Reference Include="Cucumber.Messages, Version=6.0.1.0, Culture=neutral, PublicKeyToken=b10c5988214f940c, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Cucumber.Messages.6.0.1\lib\net45\Cucumber.Messages.dll</HintPath>
@@ -132,7 +132,9 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Features\WebDriver.feature" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\source\Scorelines.TestHelpers.Selenium\Scorelines.TestHelpers.Selenium.csproj">
