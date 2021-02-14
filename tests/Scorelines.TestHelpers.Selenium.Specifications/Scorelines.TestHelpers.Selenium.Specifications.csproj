@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\packages\Anotar.NLog.Fody.4.8.1\build\Anotar.NLog.Fody.props" Condition="Exists('..\..\packages\Anotar.NLog.Fody.4.8.1\build\Anotar.NLog.Fody.props')" />
   <Import Project="..\..\packages\xunit.core.2.4.1\build\xunit.core.props" Condition="Exists('..\..\packages\xunit.core.2.4.1\build\xunit.core.props')" />
   <Import Project="..\..\packages\SpecFlow.xUnit.3.6.23\build\SpecFlow.xUnit.props" Condition="Exists('..\..\packages\SpecFlow.xUnit.3.6.23\build\SpecFlow.xUnit.props')" />
   <Import Project="..\..\packages\SpecFlow.Tools.MsBuild.Generation.3.6.23\build\SpecFlow.Tools.MsBuild.Generation.props" Condition="Exists('..\..\packages\SpecFlow.Tools.MsBuild.Generation.3.6.23\build\SpecFlow.Tools.MsBuild.Generation.props')" />
@@ -36,9 +37,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Anotar.NLog, Version=3.1.0.0, Culture=neutral, PublicKeyToken=9d5b24f0733c26f7, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Anotar.NLog.Fody.3.1.0\lib\Anotar.NLog.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="Anotar.NLog, Version=4.8.1.0, Culture=neutral, PublicKeyToken=9d5b24f0733c26f7, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Anotar.NLog.Fody.4.8.1\lib\net452\Anotar.NLog.dll</HintPath>
     </Reference>
     <Reference Include="BoDi, Version=1.5.0.0, Culture=neutral, PublicKeyToken=ff7cd5ea2744b496, processorArchitecture=MSIL">
       <HintPath>..\..\packages\BoDi.1.5.0\lib\net45\BoDi.dll</HintPath>
@@ -141,18 +141,16 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="FodyWeavers.xml" />
+    <None Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\..\packages\xunit.analyzers.0.10.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\..\packages\Fody.1.29.4\build\dotnet\Fody.targets" Condition="Exists('..\..\packages\Fody.1.29.4\build\dotnet\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\Fody.1.29.4\build\dotnet\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Fody.1.29.4\build\dotnet\Fody.targets'))" />
     <Error Condition="!Exists('..\..\packages\SpecFlow.3.6.23\build\SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\SpecFlow.3.6.23\build\SpecFlow.targets'))" />
     <Error Condition="!Exists('..\..\packages\SpecFlow.Tools.MsBuild.Generation.3.6.23\build\SpecFlow.Tools.MsBuild.Generation.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\SpecFlow.Tools.MsBuild.Generation.3.6.23\build\SpecFlow.Tools.MsBuild.Generation.props'))" />
     <Error Condition="!Exists('..\..\packages\SpecFlow.Tools.MsBuild.Generation.3.6.23\build\SpecFlow.Tools.MsBuild.Generation.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\SpecFlow.Tools.MsBuild.Generation.3.6.23\build\SpecFlow.Tools.MsBuild.Generation.targets'))" />
@@ -161,12 +159,15 @@
     <Error Condition="!Exists('..\..\packages\Selenium.WebDriver.ChromeDriver.88.0.4324.9600\build\Selenium.WebDriver.ChromeDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Selenium.WebDriver.ChromeDriver.88.0.4324.9600\build\Selenium.WebDriver.ChromeDriver.targets'))" />
     <Error Condition="!Exists('..\..\packages\xunit.core.2.4.1\build\xunit.core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\xunit.core.2.4.1\build\xunit.core.props'))" />
     <Error Condition="!Exists('..\..\packages\xunit.core.2.4.1\build\xunit.core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\xunit.core.2.4.1\build\xunit.core.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Fody.4.1.0\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Fody.4.1.0\build\Fody.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Anotar.NLog.Fody.4.8.1\build\Anotar.NLog.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Anotar.NLog.Fody.4.8.1\build\Anotar.NLog.Fody.props'))" />
   </Target>
   <Import Project="..\..\packages\SpecFlow.3.6.23\build\SpecFlow.targets" Condition="Exists('..\..\packages\SpecFlow.3.6.23\build\SpecFlow.targets')" />
   <Import Project="..\..\packages\SpecFlow.Tools.MsBuild.Generation.3.6.23\build\SpecFlow.Tools.MsBuild.Generation.targets" Condition="Exists('..\..\packages\SpecFlow.Tools.MsBuild.Generation.3.6.23\build\SpecFlow.Tools.MsBuild.Generation.targets')" />
   <Import Project="..\..\packages\SpecFlow.xUnit.3.6.23\build\SpecFlow.xUnit.targets" Condition="Exists('..\..\packages\SpecFlow.xUnit.3.6.23\build\SpecFlow.xUnit.targets')" />
   <Import Project="..\..\packages\Selenium.WebDriver.ChromeDriver.88.0.4324.9600\build\Selenium.WebDriver.ChromeDriver.targets" Condition="Exists('..\..\packages\Selenium.WebDriver.ChromeDriver.88.0.4324.9600\build\Selenium.WebDriver.ChromeDriver.targets')" />
   <Import Project="..\..\packages\xunit.core.2.4.1\build\xunit.core.targets" Condition="Exists('..\..\packages\xunit.core.2.4.1\build\xunit.core.targets')" />
+  <Import Project="..\..\packages\Fody.4.1.0\build\Fody.targets" Condition="Exists('..\..\packages\Fody.4.1.0\build\Fody.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
