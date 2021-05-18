@@ -12,7 +12,7 @@ namespace Scorelines.TestHelpers.Selenium.Services
         public WebDriverManager(IWebDriver webDriver, TimeSpan? implicitlyWait)
         {
             WebDriver = webDriver;
-            WebDriver.Manage().Timeouts().ImplicitlyWait(implicitlyWait ?? TimeSpan.FromSeconds(5));
+            WebDriver.Manage().Timeouts().ImplicitWait = implicitlyWait ?? TimeSpan.FromSeconds(5);
         }
 
         /// <summary>
