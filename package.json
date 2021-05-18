@@ -1,6 +1,6 @@
 {
   "name": "scorelines-app-test-helpers",
-  "version": "4.5.0",
+  "version": "4.6.0",
   "description": "Collection of projects containing test helpers for the scorelines-app-* collection of repositories.",
   "main": "scorelines-app-test-helpers.sln",
   "scripts": {
