@@ -46,7 +46,8 @@ namespace Scorelines.TestHelpers
             // todo: improve this method to remove need to use knownDirectories.
             var knownDirectories = new[]
             {
-                new DirectoryInfo(@"C:\Users\Tim\Code\scorelines\production\croquetscores.com")
+                new DirectoryInfo(@"C:\Users\Tim\Code\scorelines\production\croquetscores.com"),
+                new DirectoryInfo(@"C:\Users\Tim\Google Drive\Code\scorelines\production\croquetscores.com")
             };
 
             solutionDirectory = knownDirectories.SingleOrDefault(IsSolutionDirectory);
