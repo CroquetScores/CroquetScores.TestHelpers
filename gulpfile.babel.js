@@ -80,7 +80,7 @@ function createNuGetPackages(cb) {
 }
 
 function createNuGetPackage(project) {
-    nuget.exec(`pack ${project} -Properties Configuration=${config.msbuild.configuration} -Exclude FodyWeavers.xml -Version ${getPackageVersion()} -OutputDirectory ${config.directories.artifacts}`);
+    nuget.exec(`pack "${project}" -Properties Configuration=${config.msbuild.configuration} -Exclude FodyWeavers.xml -Version ${getPackageVersion()} -OutputDirectory "${config.directories.artifacts}"`);
 }
 
 // Get version number from package.json
