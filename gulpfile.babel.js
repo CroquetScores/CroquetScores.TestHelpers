@@ -27,7 +27,7 @@ const config = {
         configuration: 'Release'
     },
     nuget: {
-        source: 'nuget_timmurphy_it'
+        source: 'timmurphy.it'
     }
 };
 
