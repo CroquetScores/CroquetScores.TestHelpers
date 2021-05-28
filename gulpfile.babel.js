@@ -14,13 +14,13 @@ const config = {
         artifacts: './artifacts'
     },
     files: {
-        scorelines_test_helpers: {
-            package: './artifacts/Scorelines.TestHelpers.{version}.nupkg',
-            project: './source/Scorelines.TestHelpers/Scorelines.TestHelpers.csproj'
+        croquetscores_test_helpers: {
+            package: './artifacts/CroquetScores.TestHelpers.{version}.nupkg',
+            project: './source/CroquetScores.TestHelpers/CroquetScores.TestHelpers.csproj'
         },
-        scorelines_test_helpers_selenium: {
-            package: './artifacts/Scorelines.TestHelpers.Selenium.{version}.nupkg',
-            project: './source/Scorelines.TestHelpers.Selenium/Scorelines.TestHelpers.Selenium.csproj'
+        croquetscores_test_helpers_selenium: {
+            package: './artifacts/CroquetScores.TestHelpers.Selenium.{version}.nupkg',
+            project: './source/CroquetScores.TestHelpers.Selenium/CroquetScores.TestHelpers.Selenium.csproj'
         }
     },
     msbuild: {
@@ -66,7 +66,7 @@ function clean(cb) {
     cb();
 }
 
-// Compile Scorelines.TestHelpers.sln
+// Compile CroquetScores.TestHelpers.sln
 function compileSolution(cb) {
     msbuild.exec(`/Target:Clean;ReBuild /Property:Configuration=${config.msbuild.configuration} /Verbosity:Minimal /NoLogo`);
     cb();
@@ -74,8 +74,8 @@ function compileSolution(cb) {
 
 // Create nuget packages and write to ./artifacts directory
 function createNuGetPackages(cb) {
-    createNuGetPackage(config.files.scorelines_test_helpers.project)
-    createNuGetPackage(config.files.scorelines_test_helpers_selenium.project);
+    createNuGetPackage(config.files.croquetscores_test_helpers.project)
+    createNuGetPackage(config.files.croquetscores_test_helpers_selenium.project);
     cb();
 }
 
@@ -94,8 +94,8 @@ function pushGitRepository(cb) {
 }
 
 export function pushNuGetPackages(cb) {
-    pushNuGetPackage(config.files.scorelines_test_helpers.package);
-    pushNuGetPackage(config.files.scorelines_test_helpers_selenium.package);
+    pushNuGetPackage(config.files.croquetscores_test_helpers.package);
+    pushNuGetPackage(config.files.croquetscores_test_helpers_selenium.package);
     cb();
 }
 
