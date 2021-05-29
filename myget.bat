@@ -10,9 +10,24 @@ if not "%PackageVersion%" == "" (
 )
 
 REM Build
-"%programfiles(x86)%\MSBuild\14.0\Bin\MSBuild.exe" CroquetScores.TestHelpers.sln /p:Configuration="%config%" /m /v:M /fl /flp:LogFile=msbuild.log;Verbosity=Normal /nr:false
+echo.
+echo Restoring NuGet packages
+echo ------------------------
+"%nuget%" restore
+
+echo.
+echo Building solution
+echo -----------------
+"%MsBuildExe%" CroquetScores.TestHelpers.sln /p:Configuration="%config%" /m /v:M /fl /flp:LogFile=msbuild.log;Verbosity=Normal /nr:false
 
 REM Package
 mkdir Build
-call %nuget% pack "source\CroquetScores.TestHelpers.csproj" -symbols -o Build -p Configuration=%config% %version%
-call %nuget% pack "source\CroquetScores.TestHelpers.Selenium.csproj" -symbols -o Build -p Configuration=%config% %version%
+echo.
+echo Packing CroquetScores.TestHelpers.csproj
+echo ----------------------------------------
+call "%nuget%" pack "source\CroquetScores.TestHelpers\CroquetScores.TestHelpers.csproj" -symbols -OutputDirectory  Build -p Configuration=%config% %version%
+
+echo.
+echo Packing CroquetScores.TestHelpers.Selenium.csproj
+echo -------------------------------------------------
+call "%nuget%" pack "source\CroquetScores.TestHelpers.Selenium\CroquetScores.TestHelpers.Selenium.csproj" -symbols -OutputDirectory  Build -p Configuration=%config% %version%
