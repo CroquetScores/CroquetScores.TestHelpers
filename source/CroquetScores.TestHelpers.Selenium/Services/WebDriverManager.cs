@@ -12,7 +12,16 @@ namespace CroquetScores.TestHelpers.Selenium.Services
         public WebDriverManager(IWebDriver webDriver, TimeSpan? implicitlyWait)
         {
             WebDriver = webDriver;
-            WebDriver.Manage().Timeouts().ImplicitWait = implicitlyWait ?? TimeSpan.FromSeconds(5);
+
+            SetImplicitWait(implicitlyWait ?? TimeSpan.FromSeconds(5));
+        }
+
+        private void SetImplicitWait(TimeSpan implicitWait)
+        {
+            var options = WebDriver.Manage();
+            var timeouts = options.Timeouts();
+        
+            timeouts.ImplicitWait = implicitWait;
         }
 
         /// <summary>
