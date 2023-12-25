@@ -1,5 +1,4 @@
 using System;
-using Anotar.NLog;
 using OpenQA.Selenium;
 
 namespace CroquetScores.TestHelpers.Selenium.Services
@@ -12,16 +11,7 @@ namespace CroquetScores.TestHelpers.Selenium.Services
         public WebDriverManager(IWebDriver webDriver, TimeSpan? implicitlyWait)
         {
             WebDriver = webDriver;
-
-            SetImplicitWait(implicitlyWait ?? TimeSpan.FromSeconds(5));
-        }
-
-        private void SetImplicitWait(TimeSpan implicitWait)
-        {
-            var options = WebDriver.Manage();
-            var timeouts = options.Timeouts();
-        
-            timeouts.ImplicitWait = implicitWait;
+            webDriver.Manage().Timeouts().ImplicitWait = implicitlyWait ?? TimeSpan.FromSeconds(5);
         }
 
         /// <summary>
@@ -45,14 +35,12 @@ namespace CroquetScores.TestHelpers.Selenium.Services
         // ReSharper disable once UnusedParameter.Local
         private void Dispose(bool disposing)
         {
-            LogTo.Trace($"Dispose({nameof(disposing)}: {disposing})");
-
             if (!_isDisposed)
             {
-                // Dispose unmanaged objects and override Finalize() below.
-                LogTo.Debug("Quiting WebDriver");
-                WebDriver.Quit();
-                LogTo.Debug("Quited WebDriver");
+                if (WebDriver != null)
+                {
+                    // Dispose unmanaged objects and override Finalize() below.
+                }
             }
 
             _isDisposed = true;
