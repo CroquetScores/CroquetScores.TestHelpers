@@ -6,6 +6,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using CroquetScores.TestHelpers.Selenium.Services;
 using TechTalk.SpecFlow;
+using WebDriver = CroquetScores.TestHelpers.Selenium.Services.WebDriver;
 
 namespace CroquetScores.TestHelpers.Selenium.Specifications.Features
 {
