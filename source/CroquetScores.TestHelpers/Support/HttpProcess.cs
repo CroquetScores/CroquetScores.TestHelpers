@@ -2,7 +2,6 @@ using System;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
-using Anotar.NLog;
 using CroquetScores.TestHelpers.Extensions;
 
 namespace CroquetScores.TestHelpers.Support
@@ -79,7 +78,6 @@ namespace CroquetScores.TestHelpers.Support
 
             while (!_endpoint.IsResponding())
             {
-                LogTo.Warn($"{_endpoint} did not respond. Will keep trying for {_maximumWaitTimeForProcessToRespond.Subtract(stopwatch.Elapsed).TotalMilliseconds:N0}ms...");
                 if (stopwatch.Elapsed > _maximumWaitTimeForProcessToRespond)
                 {
                     throw new TimeoutException($"'{GetType().Name}' at '{_endpoint}' did not respond with '{_maximumWaitTimeForProcessToRespond}'.");

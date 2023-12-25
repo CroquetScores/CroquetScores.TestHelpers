@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Net.Http;
-using Anotar.NLog;
 
 namespace CroquetScores.TestHelpers.Extensions
 {
@@ -52,13 +51,11 @@ namespace CroquetScores.TestHelpers.Extensions
                 return true;
             }
 
-            LogTo.InfoException($"{uri} is not responding. {exception.Message}", exception);
             return false;
         }
 
         private static bool IsCertificateException(HttpRequestException exception)
         {
-            LogTo.Debug($"{nameof(IsCertificateException)}(HttpRequestException.InnerException: '{exception.InnerException.Message}'");
             return exception.InnerException.Message == "The underlying connection was closed: Could not establish trust relationship for the SSL/TLS secure channel.";
         }
     }

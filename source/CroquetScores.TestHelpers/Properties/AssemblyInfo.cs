@@ -1,12 +1,10 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
-using Anotar.NLog;
 
 [assembly: AssemblyTitle("CroquetScores.TestHelpers")]
-[assembly: LogMinimalMessage]
 [assembly: AssemblyCompany("Tim Murphy")]
 [assembly: AssemblyProduct("CroquetScores")]
-[assembly: AssemblyCopyright("Copyright © Tim Murphy 2012-2021")]
+[assembly: AssemblyCopyright("Copyright © Tim Murphy 2012-2023")]
 [assembly: ComVisible(false)]
 
 // todo: build script to update
