@@ -1,0 +1,59 @@
+name: build-test-and-publish
+
+on:
+  push:
+    # all branches
+
+  pull_request:
+    # all branches
+
+env:
+  PROJECT_NAME: CroquetScores.TestHelpers
+  SOLUTION_FILE_PATH: .\CroquetScores.TestHelpers.sln
+  TESTHELPERS_NUGET_FILE_PATH: .\CroquetScores.TestHelpers.nuspec
+  TESTHELPERS_SELENIUM_NUGET_FILE_PATH: .\CroquetScores.TestHelpers.Selenium.nuspec
+  TESTHELPERS_PROJECT_FOLDER: .\Source\CroquetScores.TestHelpers
+  TESTHELPERS_SELENIUM_PROJECT_FOLDER: .\Source\CroquetScores.TestHelpers.Selenium
+  VERSION: 6.1.0
+  BUILD_CONFIGURATION: Release
+  BUILD_TARGET: ReBuild
+  BUILD_VERBOSITY: Normal
+  NUGET_SERVER: https://www.myget.org/F/timpmurphy/api/v3/index.json
+  PACKAGES_FOLDER: .\packages
+  
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Check out the source code
+      uses: actions/checkout@v3
+
+    - name: Add MSBuild to PATH
+      uses: microsoft/setup-msbuild@v1.0.2
+
+    - name: Restore NuGet packages
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: nuget restore ${{env.SOLUTION_FILE_PATH}} -PackagesDirectory ${{env.PACKAGES_FOLDER}}
+
+    - name: Build solution
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: msbuild /maxCpuCount /p:Configuration=${{env.BUILD_CONFIGURATION}} /verbosity:${{env.BUILD_VERBOSITY}} /target:${{env.BUILD_TARGET}} ${{env.SOLUTION_FILE_PATH}} 
+
+    - name: Create artifacts directory
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: .\scripts\create-artifacts-directory.ps1 -majorProjectFolder ${{env.TESTHELPERS_PROJECT_FOLDER}} -buildConfiguration ${{env.BUILD_CONFIGURATION}}
+           .\scripts\create-artifacts-directory.ps1 -majorProjectFolder ${{env.TESTHELPERS_SELENIUM_PROJECT_FOLDER}} -buildConfiguration ${{env.BUILD_CONFIGURATION}}
+
+    - name: Build NuGet package
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: nuget pack ${{env.TESTHELPERS_NUGET_FILE_PATH}} -ConfigFile .\NuGet.config -PackagesDirectory ${{env.PACKAGES_FOLDER}} -Version ${{env.VERSION}} -OutputDirectory .\artifacts
+           nuget pack ${{env.TESTHELPERS_SELENIUM_NUGET_FILE_PATH}} -ConfigFile .\NuGet.config -PackagesDirectory ${{env.PACKAGES_FOLDER}} -Version ${{env.VERSION}} -OutputDirectory .\artifacts
+
+    - name: Publish NuGet package
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      env:
+        MYGET_API_KEY: ${{secrets.MYGET_API_KEY}}
+      if: github.ref == 'refs/heads/master'
+      run: nuget push .\artifacts\${{env.PROJECT_NAME}}.${{env.VERSION}}.nupkg -ApiKey ${{env.MYGET_API_KEY}} -Source ${{env.NUGET_SERVER}}
+           nuget push .\artifacts\${{env.PROJECT_NAME}}.Selenium.${{env.VERSION}}.nupkg -ApiKey ${{env.MYGET_API_KEY}} -Source ${{env.NUGET_SERVER}}

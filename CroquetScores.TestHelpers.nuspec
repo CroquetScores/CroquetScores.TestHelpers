@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>CroquetScores.TestHelpers</id>
+        <version>$version$</version>
+        <title>CroquetScores.TestHelpers</title>
+        <authors>Tim Murphy</authors>
+        <owners>Tim Murphy</owners>
+        <license type="expression">MIT</license>
+        <projectUrl>https://github.com/CroquetScores/CroquetScores.TestHelpers</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Collection of projects containing test helpers for the CroquetScores* collection of repositories.</description>
+        <copyright>Copyright (c) 2013-2023 Tim Murphy</copyright>
+        <readme>docs\readme.md</readme>
+    </metadata>
+    <files>
+        <file src=".\artifacts\CroquetScores.TestHelpers\CroquetScores.TestHelpers.*" target="lib/net48"/>
+        <file src=".\README.md" target="docs\" />
+    </files>
+</package>
