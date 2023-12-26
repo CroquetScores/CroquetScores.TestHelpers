@@ -40,20 +40,33 @@ jobs:
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: msbuild /maxCpuCount /p:Configuration=${{env.BUILD_CONFIGURATION}} /verbosity:${{env.BUILD_VERBOSITY}} /target:${{env.BUILD_TARGET}} ${{env.SOLUTION_FILE_PATH}} 
 
-    - name: Create artifacts directory
+    - name: Create CroquetScores.TestHelpers artifacts directory
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: .\scripts\create-artifacts-directory.ps1 -majorProjectFolder ${{env.TESTHELPERS_PROJECT_FOLDER}} -buildConfiguration ${{env.BUILD_CONFIGURATION}}
-           .\scripts\create-artifacts-directory.ps1 -majorProjectFolder ${{env.TESTHELPERS_SELENIUM_PROJECT_FOLDER}} -buildConfiguration ${{env.BUILD_CONFIGURATION}}
+    
+    - name: Create CroquetScores.TestHelpers.Selenium artifacts directory
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: .\scripts\create-artifacts-directory.ps1 -majorProjectFolder ${{env.TESTHELPERS_SELENIUM_PROJECT_FOLDER}} -buildConfiguration ${{env.BUILD_CONFIGURATION}}
 
-    - name: Build NuGet package
+    - name: Build CroquetScores.TestHelpers NuGet package
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: nuget pack ${{env.TESTHELPERS_NUGET_FILE_PATH}} -ConfigFile .\NuGet.config -PackagesDirectory ${{env.PACKAGES_FOLDER}} -Version ${{env.VERSION}} -OutputDirectory .\artifacts
-           nuget pack ${{env.TESTHELPERS_SELENIUM_NUGET_FILE_PATH}} -ConfigFile .\NuGet.config -PackagesDirectory ${{env.PACKAGES_FOLDER}} -Version ${{env.VERSION}} -OutputDirectory .\artifacts
 
-    - name: Publish NuGet package
+    - name: Build CroquetScores.TestHelpers.Selenium NuGet package
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: nuget pack ${{env.TESTHELPERS_SELENIUM_NUGET_FILE_PATH}} -ConfigFile .\NuGet.config -PackagesDirectory ${{env.PACKAGES_FOLDER}} -Version ${{env.VERSION}} -OutputDirectory .\artifacts
+
+    - name: Publish CroquetScores.TestHelpers NuGet package
       working-directory: ${{env.GITHUB_WORKSPACE}}
       env:
         MYGET_API_KEY: ${{secrets.MYGET_API_KEY}}
       if: github.ref == 'refs/heads/master'
       run: nuget push .\artifacts\${{env.PROJECT_NAME}}.${{env.VERSION}}.nupkg -ApiKey ${{env.MYGET_API_KEY}} -Source ${{env.NUGET_SERVER}}
-           nuget push .\artifacts\${{env.PROJECT_NAME}}.Selenium.${{env.VERSION}}.nupkg -ApiKey ${{env.MYGET_API_KEY}} -Source ${{env.NUGET_SERVER}}
+
+    - name: Publish CroquetScores.TestHelpers.Selenium NuGet package
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      env:
+        MYGET_API_KEY: ${{secrets.MYGET_API_KEY}}
+      if: github.ref == 'refs/heads/master'
+      run: nuget push .\artifacts\${{env.PROJECT_NAME}}.Selenium.${{env.VERSION}}.nupkg -ApiKey ${{env.MYGET_API_KEY}} -Source ${{env.NUGET_SERVER}}
+     
