@@ -17,6 +17,9 @@ if (-Not (Test-Path $copyFromFolder)) {
     throw "testsPath '$copyFromFolder' does not exist."
 }
 
-New-Item -ItemType Directory -Path .\artifacts
+if (-Not (Test-Path .\artifacts)) {
+    New-Item -ItemType Directory -Path .\artifacts\
+}
+
 New-Item -ItemType Directory -Path .\artifacts\$majorProjectFolder
 Get-ChildItem -Path $copyFromFolder | Copy-Item -Destination .\artifacts\$majorProjectFolder
