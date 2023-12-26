@@ -54,6 +54,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\CommonAssemblyInfo.cs">
+      <Link>Properties\CommonAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Services\RavenServer.cs" />
     <Compile Include="Services\WebServer.cs" />
     <Compile Include="Services\WebSite.cs" />
