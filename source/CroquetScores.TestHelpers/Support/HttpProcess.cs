@@ -66,9 +66,9 @@ namespace CroquetScores.TestHelpers.Support
 
                 return process;
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-                throw new Exception($"Cannot start '{GetType().Name}' at '{_endpoint}'.");
+                throw new Exception($"Cannot start '{GetType().Name}' at '{_endpoint}'.", exception);
             }
         }
 

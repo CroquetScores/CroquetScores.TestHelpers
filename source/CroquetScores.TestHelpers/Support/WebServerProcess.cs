@@ -21,8 +21,8 @@ namespace CroquetScores.TestHelpers.Support
             var startInfo = new ProcessStartInfo
             {
                 FileName = executable.FullName,
-                // String.Format("/path:\"{0}\" /port:{1} /clr:v4.0 /systray:true", projectDirectory.FullName, port)
-                Arguments = $"/systray:true /config:\"{iisExpressConfigFile.FullName}\""
+                Arguments = $"/systray:true /config:\"{iisExpressConfigFile.FullName}\"",
+                UseShellExecute = false
             };
 
             return startInfo;
