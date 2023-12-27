@@ -2,11 +2,11 @@
 
 namespace CroquetScores.TestHelpers.Services
 {
-    internal class WindowsAzureStorageEmulator
+    public class WindowsAzureStorageEmulator
     {
         private static readonly WindowsAzureStorageEmulatorProcess Instance = new WindowsAzureStorageEmulatorProcess();
 
-        internal static void StartIfNotRunning()
+        public static void StartIfNotRunning()
         {
             Instance.StartIfNotRunning();
         }
