@@ -14,7 +14,7 @@ env:
   TESTHELPERS_SELENIUM_NUGET_FILE_PATH: .\CroquetScores.TestHelpers.Selenium.nuspec
   TESTHELPERS_PROJECT_FOLDER: .\Source\CroquetScores.TestHelpers
   TESTHELPERS_SELENIUM_PROJECT_FOLDER: .\Source\CroquetScores.TestHelpers.Selenium
-  VERSION: 6.2.1
+  VERSION: 6.2.2
   BUILD_CONFIGURATION: Release
   BUILD_TARGET: ReBuild
   BUILD_VERBOSITY: Normal

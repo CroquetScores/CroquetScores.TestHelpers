@@ -10,7 +10,7 @@ namespace CroquetScores.TestHelpers
 
         private static FileInfo GetIISExpressConfigFile()
         {
-            return new FileInfo($"{Directory.FullName}\\Scripts\\iis-express\\development.config");
+            return new FileInfo($"{Directory.FullName}\\tests\\iis-express-development.config");
         }
 
         private static DirectoryInfo GetSolutionDirectory()
