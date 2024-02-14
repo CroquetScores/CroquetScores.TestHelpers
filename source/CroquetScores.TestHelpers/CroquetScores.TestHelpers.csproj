@@ -38,8 +38,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="OpenMagic, Version=3.8.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\OpenMagic.3.8.0\lib\net45\OpenMagic.dll</HintPath>
+    <Reference Include="OpenMagic, Version=4.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\OpenMagic.4.4.0\lib\net48\OpenMagic.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
